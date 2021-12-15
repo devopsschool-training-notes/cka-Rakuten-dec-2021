@@ -85,6 +85,87 @@ Define components of master & its function in 10 lines
 Define components of worker & its function in 5 lines
 What is Pod in 15 lines?
 
+================================================
+User name - centos
+key 
+
+https://www.devopsschool.com/blog/setting-up-kubernetes-clusters-using-kubeadm-manual-way-in-rhel-7-centos7/
+
+Master + Workstation
+- 15.206.149.74
+
+Worker
+- 3.110.189.99
+
+Workstation
+- 
+
+ONE WAY - I would setup - 
+Second Way - You can setup a k8s - you can use
+================================================
+
+
+
+Your Kubernetes control-plane has initialized successfully!
+=========================================================
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+=========================================================
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+=========================================================
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.31.3.28:6443 --token ultzhn.qt46naoyudm7l0s5 \
+        --discovery-token-ca-cert-hash sha256:feb5c7fe6f027a6dbe6c16024bcd53a6cad365d3b7052d8bd745ef00556be865
+=========================================================
+
+
+How workstation communicate with API server?
+==============================================
+workstation
+		kubectl 
+			read one file.(kube config)
+			$USER_HOME/.kube/config
+			ENV = config
+			$CURR_DIR/.kube/config
+			------
+			a yaml file
+			contains ---
+			-----
+			Clustor - API 
+			ACCESS
+			Context
+
+
+Bikas		3.111.40.208
+Kiran		65.1.107.191
+Raja		13.232.16.37
+pratik		3.110.90.139
+Bala		13.233.104.227
+Ali		3.108.58.184
+	
+3.110.207.139
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
