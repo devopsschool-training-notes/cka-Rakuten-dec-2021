@@ -1,0 +1,92 @@
+Start Time - 9:00 AM
+End - 6:30 PM
+--------------------
+Lunch - 1 - 2 PM
+Break - 15mins
+	11:AM 
+	3:30 PM
+-------------------------------
+
+docker run -p 80:80 --name cont1 apache
+docker run -p 81:80 --name cont2 apache - YES
+docker run -p 80:80 --name cont3 apache - NO
+
+
+
+AWS				Kubernetes
+-----------------------------------------
+vms				pods
+network				network
+lb				service - ingress
+storage				pv - pvc
+security			rbac
+
+====================================
+VM  Image ----> Create VM
+Docker Image --> Create a Container
+
+Vms's Image  | Container's Image
+----------------------------------
+BOOT FS	KERNAL
+ROOT FS	centos - ubunt - fedora
+USER FS root
+APP FS  apache ls java
+
+		ROOT FS	centos - ubuntu - fedora
+		USER FS root
+		APP FS  apache ls java
+========================================================================
+Master
+-------------------------
+- API Server 	--> POD -> Container -> Docker Image --> Google Registry
+- ETCD 		--> POD -> Container -> Docker Image --> Google Registry
+- Controller Mgr--> POD	-> Container -> Docker Image --> Google Registry 
+- Schedular	--> POD	-> Container -> Docker Image --> Google Registry 
+- Kube Proxy	--> POD -> Container -> Docker Image --> Google Registry
+	- Network Policy - Weavelay	--> POD -> Container -> Docker Image --> Google Registry
+
+- Kubelet
+- Docker
+- Kubectl
+- Kubeadm init
+
+Worker
+-------------------------
+- Kubelet
+- Docker
+- Kubectl
+- Kubeadm join
+
+- Kube Proxy	--> POD -> Container -> Docker Image --> Google Registry
+	- Network Policy - Weavelay	--> POD -> Container -> Docker Image --> Google Registry
+
+40 DIFF Platform are avaialble - K8S Clustor
+------------------------------------------
+AWS + GC + AZURE + Vmware === You want to be Manage Clustor
+- KOPS
+
+Let Cloud provider manage Clustor
+- AWS - EKS
+- AZURE - AKS
+- GC - GKE
+
+Manual Setup - Any VMs - Physical Server
+--------------------
+kubeadm 
+
+Workstation
+-------------------------
+- kubectl 
+	- Yaml
+
+===================================================================
+What is Kubernetes in 10 lines in your words.
+Define components of master & its function in 10 lines
+Define components of worker & its function in 5 lines
+What is Pod in 15 lines?
+
+
+
+
+
+
