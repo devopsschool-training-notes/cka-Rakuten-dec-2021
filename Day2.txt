@@ -1,0 +1,200 @@
+65.2.81.73		172.31.3.28	WORKSTATION
+3.110.208.137		172.31.9.2
+====================================
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodehelloworld.example.com
+  labels:
+    app: helloworld
+spec:
+  containers:
+  - name: devopsschool1
+    image: scmgalaxy/nginx-devopsschoolv1
+    ports:
+    - name: nginx-port
+      containerPort: 80
+ 
+================================
+kubectl ----> API server --> Schedular --> Kubelet (Instantiate pod)
+
+====================
+How to set or change Namespace?
+-------------------
+config in user section - DONT CHANGE
+config in curr-context - DONT CHANGE
+yaml
+env
+
+ 194  mkdir rajesh
+  195  cd rajesh/
+  196  clear
+  197  ls
+  198  vi pod1.yaml
+  199  kubectl get pods
+  200  kubectl get pods -n=rajesh
+  201  kubectl create -f pod1.yaml -n=rajesh
+  202  kubectl get pods -n=rajesh
+  203  kubectl get pods -n=rajesh -o wide
+  204  kubectl get pods -n=rajesh -h
+  205  clear
+  206  kubectl get pods -n=rajesh -h
+  207  clear
+  208  kubectl create -f pod1.yaml -n=rajesh
+  209  vi pod1.yaml
+  210  kubectl create -f pod1.yaml -n=rajesh
+  211  kubectl get pods -
+  212  kubectl get pods -n=rajesh
+  213  kubectl create -f pod1.yaml
+  214  kubectl get pods
+  215  kubectl create -f pod1.yaml
+  216  kubectl get pods -n=rajesh
+  217  clear
+  218  kubectl get pods -n=rajesh
+  219  kubectl describe pod rajesh -n=rajesh
+  220  clear
+  221  kubectl edit  pod rajesh -n=rajesh
+  222  kubectl describe pod rajesh -n=rajesh
+  223  q!
+  224  clear
+  225  kubectl get pods -n=rajesh --show-lables
+  226  kubectl get pods -n=rajesh --show-labels
+  227  vi pod1.yaml
+  228  kubectl apply -f pod1.yaml -n=rajesh
+  229  kubectl get pods -n=rajesh --show-labels
+  230  kubectl get pods
+  231  kubectl delete pod rajesh
+  232  clear
+  233  kubectl delete -f pod1.yaml -n=rajesh
+  234* kubectl get pods -n=raj
+  235  kubectl delete pod nodehelloworld.example.com
+  236  kubectl delete pod nodehelloworld.example.com -n=rajesh
+  237  history
+
+
+Troubleshooting and Debugging Commands:
+  describe      Show details of a specific resource or group of resources
+ 
+  logs          Print the logs for a container in a pod
+  245  kubectl apply -f pod1.yaml -n=rajesh
+  246  kubectl get pods -n=rajesh
+  247  kubectl logs rajesh -n=rajesh
+  248  kubectl logs rajesh -h
+  249  clear
+  250  kubectl logs rajesh -n=rajesh
+  251  kubectl get pods -o wide
+  252  kubectl get pods -o wide -n=rajesh
+  253  curl http://10.44.0.4
+  254  watch curl http://10.44.0.4 &
+  255  bbg
+  256  bg
+  257  clear
+  258  kubectl logs rajesh -n=rajesh
+  259  watch curl http://10.44.0.4
+  260  kubectl logs rajesh -n=rajesh
+
+
+  attach        Attach to a running container 
+.... Get attached to POD1 of the container
+  263  clear
+  264  kubectl get pods -n=rajesh
+  265  kubectl attach rajesh -n=rajesh
+  266  history
+
+
+
+  exec          Execute a command in a container
+-------------------
+It would execute an executable inside a container
+But with -it and bash - u can interact
+
+  268  kubectl get pods -n=rajesh
+  269  kubectl exec rajesh -n=rajesh
+  270  kubectl exec rajesh -n=rajesh ls
+  271  clear
+  272  kubectl exec rajesh -n=rajesh ps
+  273  kubectl exec rajesh -n=rajesh df
+  274  kubectl exec rajesh -n=rajesh top
+  275  sdfsf
+  276  clear
+  277  kubectl exec -it rajesh -n=rajesh /bin/bahs
+  278  kubectl exec -it rajesh -n=rajesh /bin/bash
+  279  clear
+  280  history
+  281  clear
+  282  kubectl exec -it rajesh -n=rajesh -h
+
+
+  port-forward  Forward one or more local ports to a pod
+
+
+  cp            Copy files and directories to and from containers
+  auth          Inspect authorization
+
+
+
+
+
+  port-forward  Forward one or more local ports to a pod
+
+=========================================
+kubectl port-forward --address 0.0.0.0 pod/rajesh 8888:80 -n=rajesh
+
+8888:80
+Host Port : Container Port
+
+284  history
+  285  clear
+  286  kubectl port-forward -h
+  287  clear
+  288  kubectl get pods -n=rajesh
+  289  clear
+  290  kubectl port-forward -h
+  291  clear
+  292  kubectl port-forward --address 0.0.0.0 pod/rajesh 8888:80 -n=rajesh
+
+
+  cp            Copy files and directories to and from containers
+  297  kubectl get pods -n=rajesh
+  298  kubectl exec rajesh -n=rajesh ls /tmp
+  299  kubectl cp -h
+  300  clear
+  301  kubectl cp pod1.yaml rajesh:/tmp -n=rajesh
+  302  kubectl exec rajesh -n=rajesh ls /tmp
+
+
+  305  kubectl auth
+  306  kubectl auth can-i create node
+  307  kubectl auth can-i create pods
+  308  kubectl auth can-i delete pods
+  309  kubectl auth can-i delete ns
+
+
+QA
+==============================
+
+=======================================================
+Container is running as long as
+	----- PID 1 is running state
+	
+if PID 1 is not running --- Then Container get EXIT
+
+How to make running?
+------------------------
+CMD 
+ENTRYPOINT
+================Dockerfile=======================================
+
+Container is running with PID1= Some exec...
+He wants to run - Some SCRIPT which is present inside a container.
+-----------------------------------
+1. Modify dockerfile
+2. Add a Script into 
+
+
+https://github.com/nginxinc/docker-nginx/blob/ef8e9912a2de9b51ce9d1f79a5c047eb48b05fc1/mainline/debian/Dockerfile
+
+https://github.com/jenkinsci/docker/blob/587b2856cd225bb152c4abeeaaa24934c75aa460/Dockerfile
+
+https://www.youtube.com/playlist?list=PLDhScTEBdP8xQt4Chw9UieL0Q9e2TCpKI
