@@ -198,3 +198,142 @@ https://github.com/nginxinc/docker-nginx/blob/ef8e9912a2de9b51ce9d1f79a5c047eb48
 https://github.com/jenkinsci/docker/blob/587b2856cd225bb152c4abeeaaa24934c75aa460/Dockerfile
 
 https://www.youtube.com/playlist?list=PLDhScTEBdP8xQt4Chw9UieL0Q9e2TCpKI
+
+----------------------------
+ip-172-31-7-196.ap-south-1.compute.internal
+172.31.7.196
+
+======================================================================
+======================================================================
+RC - ReplicationController
+--------------------------------------------------------------------------
+Replication - 1 POD to Many POD
+Controller - Desire#of PODS  always === Actual#Of Pods
+--------------------------------------------------------------
+https://www.devopsschool.com/blog/kubernetes-replicationcontroller-example-programs/
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  # Unique key of the ReplicationController instance
+  name: rajesh
+spec:
+  # 3 Pods should exist at all times.
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      # Run the nginx image
+      - name: nginx
+        image: scmgalaxy/nginx-devopsschoolv1
+
+
+
+
+ 352  kubectl get rc -n=rajesh
+  353  kubectl edit rc rajesh -n=rajesh
+  354  kubectl get rc -n=rajesh
+  355  kubectl get pods -n=rajesh
+  356  kubectl edit rc rajesh -n=rajesh
+  357  kubectl get pods -n=rajesh
+  358  clear
+  359  vi rc.yaml
+  360  kubectl apply -f rc.yaml -n=rajesh
+  361  kubectl get pods -n=rajesh
+  362  clear
+  363  ls
+  364  clear
+  365  kubectl
+  366  clear
+  367  kubectl scale -h
+  368  clear
+  369  ls
+  370  kubectl get rc -n=rajesh
+  371  kubectl scale --replicas=2 rc/rajesh -n=rajesh
+  372  kubectl get rc -n=rajesh
+  373  kubectl scale --replicas=6 rc/rajesh -n=rajesh
+  374  kubectl get rc -n=rajesh
+  375  kubectl get pods -n=rajesh
+  376  kubectl describe pod rajesh-525cc -n=rajesh
+  377  clear
+  378  kubectl describe rc rajesh -n=rajesh
+  379  clear
+  380  ls
+  381  clear
+  382  kubectl get pods -n=rajesh
+  383  kubectl get rc -n=rajesh
+  384  kubectl get pods -n=rajesh
+  385  kubectl delete pod rajesh-525cc rajesh-pmh8c rajesh-t5blh -n=rajesh
+  386  kubectl get pods -n=rajesh
+
+
+
+======================================================================
+======================================================================
+Deployment
+--------------------------------------------------------------------------
+		Replication + Controller
+------------------------------------------------------
+		ReplicaSets	
+		- ReplicationController is removed
+
+Versioning
+Rollout
+Rollback
+
+
+
+
+ 390  kubectl create -f
+  391  kubectl create -h
+  392  clear
+  393  kubectl create deploy -h
+  394  clear
+  395  kubectl get deploy -n=rajesh
+  396  kubectl get rc -n=rajesh
+  397  kubectl delete rc rajesh  -n=rajesh
+  398  kubectl get rc -n=rajesh
+  399  kubectl get deploy -n=rajesh
+  400  kubectl create deployment my-dep --image=scmgalaxy/nginx-devopsschoolv1 -n=rajesh
+  401  kubectl get deploy -n=rajesh
+  402  kubectl get pod -n=rajesh
+  403  kubectl edit deploy my-dep -n=rajesh
+  404  kubectl get pod -n=rajesh
+  405  clear
+  406  kubectl scale --replicas=6 deploy/my-dep -n=rajesh
+  407  kubectl get pod -n=rajesh
+  408  kubectl scale --replicas=2 deploy/my-dep -n=rajesh
+  409  kubectl get pod -n=rajesh
+  410  clear
+  411  kubectl get pod -n=rajesh
+  412  kubectl describe pod my-dep-7d597cfb66-hp9p9 -n=rajesh
+  413  clear
+  414  kubectl get rs -n=rajesh
+  415  clear
+  416  kubectl get pod -n=rajesh
+  417  kubectl delete pod my-dep-7d597cfb66-hp9p9 my-dep-7d597cfb66-n7pzq -n=rajesh'
+  418  kubectl delete pod my-dep-7d597cfb66-hp9p9 my-dep-7d597cfb66-n7pzq -n=rajesh
+  419  kubectl get pod -n=rajesh
+  420  kubectl delete deploy my-dep -n=rajesh
+  421  kubectl get pod -n=rajesh
+  422  kubectl delete deploy my-dep -n=rajesh
+  423  history
+
+
+ 428  kubectl create deployment my-dep --image=scmgalaxy/nginx-devopsschoolv1 -n=rajesh
+  429  clear
+  430  ls
+  431  kubectl get pods -n=rajesh
+  432  kubectl describe pod my-dep-7d597cfb66-g9bbp -n=rajesh
+  433  clear
+  434  kubectl describe rs my-dep-7d597cfb66 -n=rajesh
+  435  kubectl get rs -n=rajesh
+  436  kubectl delete rs my-dep-7d597cfb66 -n=rajesh
+  437  kubectl get rs -n=rajesh
+
+
+
+
