@@ -334,6 +334,121 @@ Rollback
   436  kubectl delete rs my-dep-7d597cfb66 -n=rajesh
   437  kubectl get rs -n=rajesh
 
+======================
+
+  458  kubectl explain pod
+  459  clear
+  460  kubectl explain pod.status
+  461  clear
+  462  kubectl explain pod.status.qosClass
+  463  kubectl explain pod.spec
+  464  clear
+  465  kubectl explain pod.spec.containers
+  466  clear
+  467  kubectl explain ns.spec
+  468  kubectl explain rc.spec
+  469  clear
+  470  kubectl explain deploy.spec
+  471  clear
+  472  kubectl explain deploy.spec.strategy
+  473  kubectl explain deploy.spec.strategy.type
+  474  kubectl explain deploy.spec.strategy.rollingUpdate
+  475  clear
+
+
+=========================================
+https://www.devopsschool.com/blog/list-of-popular-deployment-strategies/
+https://www.devopsschool.com/blog/kubernetes-deployment-strategy-explained-with-example/
+
+Rollout
+
+$ kubectl create deployment my-dep --image=scmgalaxy/nginx-devopsschoolv1 --replicas=15
+$ kubectl rollout history deploy/my-dep
+$ kubectl rollout status deploy/my-dep
+$ kubectl get pods -o wide
+$ curl http://ip-of-pod
+$ kubectl edit deploy/my-dep # Change image to scmgalaxy/nginx-devopsschoolv2
+$ kubectl rollout history deploy/my-dep
+$ kubectl rollout status deploy/my-dep
+$ kubectl get pods -o wide
+$ curl http://ip-of-pod
+
+Rollback
+
+$ kubectl rollout history deploy/my-dep
+$ kubectl rollout undo deploy/my-dep --to-revision=1
+$ kubectl rollout status deploy/my-dep
+$ kubectl get pods -o wide
+$ curl http://ip-of-pod
+==============================================================
+==============================================================
+
+Network LB - 
+
+
+Available Commands:
+  clusterip    Create a ClusterIP service
+  externalname Create an ExternalName service
+  loadbalancer Create a LoadBalancer service
+  nodeport     Create a NodePort service
+
+
+clusterip == SERVICE Create gets a IP address of Clustor only & Scope of Service is Clustor Only
+
+
+kubectl create service clusterip my-cs --tcp=5678:80 -n=rajesh
+
+5678: - Service PORT
+80: Container PORT of the POD
+
+
+Tasks & Assignment
+----------------------
+[centos@ip-172-31-3-28 rajesh]$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   23h
+[centos@ip-172-31-3-28 rajesh]$
+
+
+
+  531  ls
+  532  kubectl create -f pod1.yaml -n=rajesh
+  533  kubectl create -f pod2.yaml -n=rajesh
+  534  clear
+  535  kubectl get pods -n=rajesh -o wide
+  536  curl http://10.36.0.22
+  537  curl http://10.44.0.4
+  538  clear
+  539  kubectl get svc -n=rajesh
+  540  kubectl get svc
+  541  kubectl get svc -n=rajesh
+  542  kubectl create -h
+  543  clear
+  544  kubectl create service -h
+  545  kubectl create service clusterip -h
+  546  clear
+  547  kubectl create service clusterip my-cs --tcp=5678:80 -n=rajesh
+  548  kubectl get svc -n=rajesh
+  549  kubectl describe svc my-cs -n=rajesh
+  550  kubectl get svc -n=rajesh --show-labels;kubectl get pods -n=rajesh --show-labels
+  551  kubectl get svc -n=rajesh --show-labels;kubectl get pods -n=rajesh --show-labels;kubectl describe svc my-cs -n=rajesh
+  552  clear
+  553  kubectl get svc -n=rajesh --show-labels;kubectl get pods -n=rajesh --show-labels;kubectl describe svc my-cs -n=rajesh
+  554  kubectl edit svc my-cs -n=rajesh --
+  555  clear
+  556  kubectl get svc -n=rajesh --show-labels;kubectl get pods -n=rajesh --show-labels;kubectl describe svc my-cs -n=rajesh
+  557  kubectl edit svc my-cs -n=rajesh --
+  558  clear
+  559  kubectl get svc -n=rajesh --show-labels;kubectl get pods -n=rajesh --show-labels;kubectl describe svc my-cs -n=rajesh
+  560  curl http://10.109.145.98:5678
+  561  clear
+  562  watch curl http://10.109.145.98:5678
+
+
+
+
+
+
 
 
 
