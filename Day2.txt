@@ -444,7 +444,42 @@ kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   23h
   561  clear
   562  watch curl http://10.109.145.98:5678
 
+=================================
+  loadbalancer Create a LoadBalancer service
+  nodeport     Create a NodePort service
+=================================
 
+
+  nodeport     Create a NodePort service
+---------------------
+- Create a Service with ClustorIP
+- Port-Forward that Services at Each Node of the Clustor.
+
+kubectl create service nodeport my-np --tcp=5678:80 -n=rajesh
+
+ loadbalancer Create a LoadBalancer service
+-----------------------------------------------
+- Create a Service with ClustorIP
+- Port-Forward that Services at Each Node of the Clustor.
+- Create a LB at Cloud and Add Each node of the Clustor to LB
+
+kubectl create service loadbalancer my-np --tcp=5678:80 -n=rajesh
+
+=================================================================================
+
+
+kubectl create deployment my-dep --image=scmgalaxy/nginx-devopsschoolv1 --replicas=15 -n=rajesh
+
+
+
+kubectl expose deploy my-dep --port=80 --target-port=80 --type=NodePort -n=rajesh
+
+
+
+
+
+Task & 
+externalname Create an ExternalName service
 
 
 
