@@ -1,7 +1,7 @@
 65.2.81.73		172.31.3.28	WORKSTATION
 3.110.208.137		172.31.9.2
 ====================================
-Storage
+Storage					DONE
 Authentication
 Authorization
 
@@ -159,6 +159,152 @@ spec:
     - name: task-pv-storage
       persistentVolumeClaim:
         claimName: pvchostpath1
+
+
+
+================================================================
+===================================================================
+https://www.devopsschool.com/blog/understanding-authentication-authorization-in-kubernetes/
+
+
+
+
+
+
+[centos@ip-172-31-3-28 rajesh]$ kubectl config view
+
+apiVersion: v1
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+---------------------
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://172.31.3.28:6443
+  name: kubernetes
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://172.31.3.28:6443
+  name: kubernetes
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://172.31.3.28:6443
+  name: kubernetes
+---------------------
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+---------------------
+
+---------------------
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+- name: employee
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+- name: employee
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+- name: employee
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+---------------------
+
+
+
+
+
+
+
+kubectl config set-credentials employee --client-certificate=/home/centos/rajesh/employee.crt  --client-key=/home/centos/rajesh/employee.key
+kubectl config set-context employee-context --cluster=kubernetes --namespace=office --user=employee
+
+=========================================================================
+AWS			Kubernetes
+-------------------------------------------------------------------
+IAM			RBAC
+Policy			VERB
+	GROUP			ROLE
+	USER
+
+
+
+
+
+
+
+
+
+
+
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: office
+  name: deployment-manager
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["deployments", "replicasets", "pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"] # You can also use ["*"]
+
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: deployment-manager-binding
+  namespace: office
+subjects:
+- kind: User
+  name: employee
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: deployment-manager
+  apiGroup: ""
+
+===========================
+Storage
+-------------------
+pv
+pvc
+storageclass
+
+
+
+
+AUTH & AUTH
+-------------
+role
+rolebind
+clustorrole
+clustorrolebind
+sa
+
+https://www.devopsschool.com/blog/understanding-authentication-authorization-in-kubernetes/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
