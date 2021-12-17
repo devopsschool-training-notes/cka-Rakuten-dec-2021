@@ -1,0 +1,169 @@
+65.2.81.73		172.31.3.28	WORKSTATION
+3.110.208.137		172.31.9.2
+====================================
+Storage
+Authentication
+Authorization
+
+Limit
+Jobs 
+CronJobs
+
+POB Obserbability
+
+Ingress
+
+Admin
+- Maintainces
+- Upgrade
+
+Multi Master
+=================================================
+Kubernetes API primitives 		DONE
+Kubernetes building blocks 		DONE
+Kubernetes Services 			DONE
+Advance Operations with Deployments		DONE
+
+Decoupling configuration with applications using ConfigMaps
+Managing storage requirements for applications 
+Running Stateful applications with Kubernetes 
+Decoupling configuration with applications using ConfigMaps
+Managing storage requirements for applications 
+
+Security Considerations 
+Resource Limiting 
+Managing batch operations in Kubernetes 
+Using LivenessProbes and ReadinessProbes for application health checks 
+Logging, Monitoring and Debugging of applications in Kubernetes
+Container Network Interface (CNI)and CNI Plugins Overview 
+- Calico
+
+Troubleshooting
+
+
+CRD
+--------------------
+Custom Resource Def-- CKAD
+-----------------------
+POD --- Yo
+=====================================================================================
+=====================================================================================
+Storage
+=====================================================================================
+1 Hours
+-----------------
+Problm with POD in term of Data Pers*
+-------------------------------------
+How?
+---------------------
+Kubernetes Volume
+--------------------------------------------------
+
+
+Storage Tech
+-------------------------------------------------
+Block Storage			= ebs, laptop 10+ SOL		== hostPath, local
+Object Storage			= s3, gcs, git repo 10+ SOL
+Network Aka File Storage	= efs, nfs	10+ SOL		== nfs
+-----------------------------
+How kubernetes would understand these storage?
+- Via Kubernet Storage Interface AKA Volume plugins
+
+awsElasticBlockStore - AWS Elastic Block Store (EBS)
+azureDisk - Azure Disk
+azureFile - Azure File
+cephfs - CephFS volume
+csi - Container Storage Interface (CSI)
+fc - Fibre Channel (FC) storage
+gcePersistentDisk - GCE Persistent Disk
+glusterfs - Glusterfs volume
+hostPath - HostPath volume (for single node testing only; WILL NOT WORK in a multi-node cluster; consider using local volume instead)
+iscsi - iSCSI (SCSI over IP) storage
+local - local storage devices mounted on nodes.
+nfs - Network File System (NFS) storage
+portworxVolume - Portworx volume
+rbd - Rados Block Device (RBD) volume
+vsphereVolume - vSphere VMDK volume
+The following types of PersistentVolume are deprecated. This means that support is still available but will be removed in a future Kubernetes release.
+
+cinder - Cinder (OpenStack block storage) (deprecated in v1.18)
+flexVolume - FlexVolume (deprecated in v1.23)
+flocker - Flocker storage (deprecated in v1.22)
+quobyte - Quobyte volume (deprecated in v1.22)
+storageos - StorageOS volume (deprecated in v1.22)
+=================================================================
+
+How can i register Storage at Kubernetes so We can use with PODS?
+------------------------------------------------------------------
+-----------ADMIN-------------------------SO -------USER-----------
+
+ADMIN
+How can i register Storage at Kubernetes?
+---------------------------------------------
+STATIC 
+-----------------------
+ADMIN would ADD Storage at Kubernetes in Advance
+--------------------------------------------------
+How can i register Storage at Kubernetes Static way?
+--------------------------------------------------
+PV --------> PVC ---> ATTACHED to POD --> Mount Inside a container
+==ADMIN====| ======================USER==========================|
+ ???	      ???      ?????                 ?????
+https://www.devopsschool.com/blog/persistentvolume-persistentvolumeclaim-volumes-using-hostpath/
+
+
+DYNAMIC
+-----------------------
+The Moment - USer demand storage - ADDing Storage to k8 is done AUTOMATICALLY
+=====================================
+PVC --> StorargeClass --Create--> PV --> Attached to POD ---> Mount Inside a container
+
+StorargeClass
+---------------------
+Would create PV dynamically
+https://kubernetes.io/docs/concepts/storage/storage-classes/
+================
+How to setup NFS
+------------------
+https://www.devopsschool.com/blog/setup-nfs-server-and-use-inside-a-kubernetes-pods-in-rhel-centos7/
+
+PV and PVC 
+https://www.devopsschool.com/blog/kubernetes-persistentvolume-and-persistentvolumeclaim-using-nfs-volume-types/
+
+
+
+Tasks:
+-----------
+Docker Volume
+
+
+
+
+
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: task-pv-pod
+spec:
+  containers:
+    - name: task-pv-container
+      image: scmgalaxy/nginx-devopsschoolv1
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: task-pv-storage
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: pvchostpath1
+
+
+
+
+
+
+
+
